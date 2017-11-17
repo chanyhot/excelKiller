@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+var ExcelKiller = require('../src/ExcelKiller.js');
+
+var excelKiller = new ExcelKiller(process.argv[2]);
+
+setTimeout(function() {
+    excelKiller.writeExcel();
+    excelKiller.downloadImages();
+}, 5000);
