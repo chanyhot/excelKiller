@@ -19,6 +19,7 @@
 
 ```
 npm install
+cd excelKiller
 ./bin/excelkiller
 ```
 
