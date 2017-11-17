@@ -18,8 +18,8 @@
 3. 稍等片刻，你就能收菜了！不客气。
 
 ```
-npm install
 cd excelKiller
+npm install
 ./bin/excelkiller
 ```
 

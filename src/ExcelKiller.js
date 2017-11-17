@@ -1,12 +1,14 @@
 var fs = require('fs');
+var path = require('path');
 var xlsx = require("node-xlsx");
 var request = require("request");
 var mkdirp = require('mkdirp');
 var Promise = require('promise');
 
 var ExcelKiller = function(filename) {
-    this.dir = '../images';
-    this.list = filename ? xlsx.parse("../excel/" + filename + '.xlsx') : xlsx.parse("../excel/" + 'import.xlsx');
+    this.dir = path.join(__dirname, '../images');
+    this.export = path.join(__dirname, '../exportExcel.xlsx');
+    this.list = filename ? xlsx.parse(path.join(__dirname, '../excel/') + filename + '.xlsx') : xlsx.parse(path.join(__dirname, '../excel/') + 'import.xlsx');
     this.findImgList = [];
     this.num = 0;
 
@@ -27,33 +29,33 @@ var ExcelKiller = function(filename) {
     var srcStrTemp = ''
 
     //删除生成的目录
-    function deleteFolder(path) {
+    function deleteFolder(_path) {
         var files = [];
-        if (fs.existsSync(path)) {
-            files = fs.readdirSync(path);
+        if (fs.existsSync(_path)) {
+            files = fs.readdirSync(_path);
             files.forEach(function(file, index) {
-                var curPath = path + "/" + file;
+                var curPath = _path + "/" + file;
                 if (fs.statSync(curPath).isDirectory()) { // recurse
                     deleteFolder(curPath);
                 } else { // delete file
                     fs.unlinkSync(curPath);
                 }
             });
-            fs.rmdirSync(path);
+            fs.rmdirSync(_path);
         }
     }
 
     //删除生成的文件
-    function deleteFile(path) {
-        if (fs.existsSync(path)) {
-            fs.unlinkSync(path);
+    function deleteFile(_path) {
+        if (fs.existsSync(_path)) {
+            fs.unlinkSync(_path);
         }
     }
 
     //重置
     function reset() {
-        deleteFolder('../images');
-        deleteFile('../exportExcel.xlsx');
+        deleteFolder(_this.dir);
+        deleteFile(_this.export);
     }
 
     //获取时间戳
@@ -106,7 +108,7 @@ var ExcelKiller = function(filename) {
 ExcelKiller.prototype.writeExcel = function() {
     var data = this.list[0].data;
     var buffer = xlsx.build([{ name: "mySheetName", data: data }]); // Returns a buffer
-    fs.appendFile('../exportExcel.xlsx', buffer);
+    fs.appendFile(this.export, buffer);
 };
 
 //下载图片
