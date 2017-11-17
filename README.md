@@ -13,9 +13,9 @@
 
 ## 如何运行
 
-1.收到文件夹后，解压，管理员权限运行cmd，进入该目录，运行npm install。
-2.替换`excel`目录下的`import.xlsx`为你需要的内容，然后执行`./bin/excelkiller`（或者添加新的excel文件到该目录中，执行`./bin/excelkiller 文件名`，文件名不带后缀）。
-3.稍等片刻，你就能收菜了！不客气。
+1. 收到文件夹后，解压，管理员权限运行cmd，进入该目录，运行npm install。
+2. 替换`excel`目录下的`import.xlsx`为你需要的内容，然后执行`./bin/excelkiller`（或者添加新的excel文件到该目录中，执行`./bin/excelkiller 文件名`，文件名不带后缀）。
+3. 稍等片刻，你就能收菜了！不客气。
 
 ```
 npm install
