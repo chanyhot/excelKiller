@@ -17,6 +17,7 @@ var ExcelKiller = function(filename) {
         var promise = new Promise(function(resolve, reject) {
             request.get(url).on('error', function(err) {
                 console.log(err)
+                resolve();
             }).on('response', function(response) {
                 resolve();
             }).pipe(fs.createWriteStream(dir + "/" + filename));
