@@ -91,15 +91,17 @@ var ExcelKiller = function(filename) {
         makeDir();
         for (var i = 1; i < _this.list[0].data.length; i++) {
             var findImg = _this.list[0].data[i][2].match(/src=\"https:\/\/.*?\"|src=\"\/\/.*?\"/g);
-            for (var j = 0; j < findImg.length; j++) {
-                var imgUrl = makeDownloadUrl(findImg[j])
-                var imageName = makeImageName(imgUrl.substr(-4, 4))
-                srcStr = '<img src="images/' + imageName + '">';
-                srcStrTemp += srcStr
-                _this.findImgList.push([imgUrl, imageName]);
+            if (findImg !== null) {
+                for (var j = 0; j < findImg.length; j++) {
+                    var imgUrl = makeDownloadUrl(findImg[j])
+                    var imageName = makeImageName(imgUrl.substr(-4, 4))
+                    srcStr = '<img src="images/' + imageName + '">';
+                    srcStrTemp += srcStr
+                    _this.findImgList.push([imgUrl, imageName]);
+                }
+                _this.list[0].data[i].push(srcStrTemp);
+                srcStrTemp = '';
             }
-            _this.list[0].data[i].push(srcStrTemp);
-            srcStrTemp = '';
         }
     },2000)
 }
