@@ -7,6 +7,7 @@ var Promise = require('promise');
 
 var ExcelKiller = function(filename) {
     this.dir = [path.join(__dirname, '../imagesFromDetail'), path.join(__dirname, '../imagesFromList')];
+    this.folderName = ['imagesFromDetail', 'imagesFromList'];
     this.export = path.join(__dirname, '../exportExcel.xlsx');
     this.list = filename ? xlsx.parse(path.join(__dirname, '../excel/') + filename + '.xlsx') : xlsx.parse(path.join(__dirname, '../excel/') + 'import.xlsx');
     this.findImgList = [];
@@ -103,7 +104,7 @@ var ExcelKiller = function(filename) {
                 for (var j = 0; j < findImg.length; j++) {
                     var imgUrl = makeDownloadUrl(findImg[j])
                     var imageName = makeImageName(imgUrl.substr(-4, 4))
-                    srcStr = '<img src="images/' + imageName + '">';
+                    srcStr = '<img src="' + _this.folderName[_this.howManyList - 1] + '/' + imageName + '">';
                     srcStrTemp += srcStr
                     _this.findImgList[_this.howManyList - 1].push([imgUrl, imageName]);
                 }
