@@ -6,5 +6,6 @@ var excelKiller = new ExcelKiller(process.argv[2]);
 
 setTimeout(function() {
     excelKiller.writeExcel();
-    excelKiller.downloadImages();
+    excelKiller.downloadImages(0);
+    excelKiller.downloadImages(1);
 }, 5000);
